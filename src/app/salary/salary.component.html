@@ -1,0 +1,9 @@
+
+<div [formGroup]="salForm">
+        <span>Salary : </span>
+        <input  type="text" size="30" pInputText formControlName="salary">
+        <p-message severity="error" text="Field is required"
+            *ngIf="salForm.get('salary').touched && salForm.get('salary').errors?.required">
+        </p-message>
+        
+</div>

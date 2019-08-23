@@ -1,0 +1,55 @@
+p<h2 style="color: blueviolet">{{ title }} </h2>
+
+<!-- ****************ng class*************** -->
+<p [ngClass]="{a1: colour}">Angular Training is started</p>
+<button (click)="click()">click</button>
+
+<!-- ****************ng style**************** -->
+<p [ngStyle]="{'font-style': style,'font-size':size,'color': colour1}">Please Register for training</p>
+<!-- ***************ngFor and ngIf*********** -->
+<h2>{{Angulattopics}}</h2>
+<p>Enter code "angular" to print the list of topics in angular</p>
+<input type="text" [(ngModel)]="data">
+<ol *ngIf="data === 'angular'">
+    <li *ngFor="let topic of Angulartopics">
+        Topics: {{topic}}
+    </li>
+</ol>
+<!-- ********************ngSwitch************* -->
+<h3>ngSwitch</h3>
+
+<div [ngSwitch]="val">
+    <div *ngSwitchCase="'DataBinding'">you selected Databinding topic </div>
+    <div *ngSwitchCase="'ComponentCommunication'">you selected ComponentCommunication topic</div>
+    <div *ngSwitchCase="'services'">you selected services topic </div>
+    <div *ngSwitchCase="'typescript'">you selected typescript topic </div>
+    <div *ngSwitchCase="'forms'">you selected forms topic </div>
+    <p *ngSwitchDefault>select the topic in the list</p>
+</div>
+<!-- ********************custom directive************************* -->
+
+
+<h3 class="first">dropdown</h3>
+<p-toggleButton [(ngModel)]="checked1" (click)="showIf=!showIf" onLabel="On" offLabel="Off" [style]="{'width':'150px'}"></p-toggleButton>&nbsp;&nbsp;
+<div *CustomIf="showIf"><b> Dropdown is displayed.</b>
+    <p-dropdown [options]="atool" [(ngModel)]="tools" placeholder="Select a tool" optionLabel="name" [showClear]="true" ></p-dropdown>&nbsp;&nbsp;
+</div>
+<!-- <ul>
+    <li *ngfor="let e from atool">
+        {{e.name}}
+    </li>
+</ul> --><br>
+<br>
+<p-dropdown [options]="products" [(ngModel)]="prod"  optionLabel="name" [showClear]="true"></p-dropdown>&nbsp;&nbsp;
+<h4>The list of dropdown values are </h4>
+<div *ngFor="let product of products" [ngValue]="product"> [{{product.id}}   {{product.name}}]</div>
+<h4>product id:{{prod.id}}</h4>
+<div [ngSwitch]="prod.id">
+        <p *ngSwitchCase="1">The Product id : {{prod.id}} name: {{prod.name}} price: {{prod.price}}</p>
+        <p *ngSwitchCase="2">The Product id :{{prod.id}} name: {{prod.name}} price:{{prod.price}}</p>
+        <p *ngSwitchCase="3">The Product id :{{prod.id}} name: {{prod.name}} price:{{prod.price}}</p>
+        <p *ngSwitchCase="4">The Product id :{{prod.id}} name: {{prod.name}} price:{{prod.price}}</p>
+        <p *ngSwitchCase="5">The Product id :{{prod.id}} name: {{prod.name}} price:{{prod.price}}</p>
+        <p *ngSwitchDefault>Product not available</p>
+    </div>
+

@@ -1,0 +1,247 @@
+<form [formGroup]="empForm">
+  <p-accordion>
+    <p-accordionTab header="FORM">
+      <div class="a1">
+        <h2>EMPLOYEE FORM</h2>
+        <div class="ui-inputgroup ">
+          <span class="ui-inputgroup-addon">FirstName : <i class="fa fa-user"></i></span>
+          <input type="text" pInputText placeholder="Firstname" formControlName="firstname">
+          <p-message severity="error" text="FirstName is Required"
+            *ngIf="empForm.get('firstname').touched && empForm.get('firstname').errors?.required"> </p-message>
+
+          <p-message severity="error" text=" Field should contain minimum 5 characters"
+            *ngIf="empForm.get('firstname').errors?.minlength"> </p-message>
+        </div><br>
+
+        <div class="ui-inputgroup">
+          <span class="ui-inputgroup-addon">LastName : <i class="fa fa-user"></i></span>
+          <input type="text" pInputText placeholder="Lastname" formControlName="lastname">
+          <p-message severity="error" text="Lastame is Required"
+            *ngIf="empForm.get('lastname').touched && empForm.get('lastname').errors?.required "></p-message>
+          <p-message severity=" error" text="Field should contain minimum 5 characters "
+            *ngIf="empForm.get('lastname').errors?.minlength"> </p-message>
+        </div><br>
+        <div class="ui-inputgroup">
+          <span class="ui-inputgroup-addon">UserName : <i class="fa fa-user"></i></span>
+          <input type="text" pInputText placeholder="Username" formControlName="username" placeholder="abc@xyz.com">
+          <p-message severity="error" text="UserName is Required"
+            *ngIf="empForm.get('username').touched && empForm.get('username').errors?.required "></p-message>
+          <p-message severity=" error" text="Enter valid Username" *ngIf="empForm.get('username').errors?.pattern">
+          </p-message>
+        </div><br>
+        <div class="pas">
+          <span>Password : </span>
+          <input pPassword onCopy= "return false" onPaste= " return false" onDrag= " return false" onDrop= "return false" type="password" formControlName="password" />
+          <span *ngIf="empForm.get('password').touched && empForm.get('password').errors?.required"> Password is Required</span>
+          <span *ngIf="empForm.get('password').errors?.minlength"> Password Field should contain minimum 8 characters</span>
+          <span *ngIf=" empForm.get('password').errors?.pattern"> & Password should match pattern </span>
+        </div><br>
+        <div>
+          <span>Confirm Password : </span>
+          <input pPassword   type="password" formControlName="confirmpassword" />
+          <span
+            *ngIf="empForm.get('confirmpassword').touched && (empForm.get('confirmpassword').errors?.required) ">Please
+            enter correct Password</span>
+          <span *ngIf="empForm.get('confirmpassword').touched && empForm.get('confirmpassword').errors?.isError">Confirm
+            Password Must be Same as Password</span>
+        </div><br>
+        <div>
+          <span>DateofBirth : </span>
+          <p-calendar [showIcon]="true" formControlName="dateofbirth"></p-calendar>
+        </div><br>
+        <div>
+          <span>Gender : </span>
+          <p-radioButton name="group1" value="Male" label="Male" formControlName="gender"></p-radioButton>
+          <p-radioButton name="group1" value="Female" label="Female" formControlName="gender"></p-radioButton>
+        </div><br>
+        <div>
+          <span>Branch : </span>
+          <p-dropdown [options]="branch1" formControlName="branch" placeholder="Select a branch" optionLabel="name">
+          </p-dropdown>
+        </div><br>
+        <div>
+          <span class="first">Technologies : </span>
+          <p-checkbox name="group1" value="JAVA" label="JAVA" [formControl]="empForm.controls['qualification']">
+          </p-checkbox>
+          <p-checkbox name="group1" value="C" label="C" [formControl]="empForm.controls['qualification']"></p-checkbox>
+          <p-checkbox name="group1" value="PYTHON" label="PYTHON" [formControl]="empForm.controls['qualification']">
+          </p-checkbox>
+          <p-checkbox name="group1" value="ANGULAR" label="ANGULAR" [formControl]="empForm.controls['qualification']">
+          </p-checkbox>
+        </div><br><br>
+        <div>
+          <app-salary [salForm]="empForm"></app-salary>
+        </div><br>
+        <div>
+          <span>KnowledgeInSubject : {{slider}} </span>
+          <p-slider [style]="{'width':'14em'}" formControlName="slider"></p-slider>
+        </div><br><br>
+        <div>
+          <span>SoftSkillsRating : {{val1}}</span>
+          <p-rating formControlName="val1"></p-rating>
+        </div><br>
+        <div>
+          <span>Worked Locations : </span>
+          <p-listbox [options]="locations" (click)='getSelectedLoc()' formControlName="formlocation" multiple="multiple"
+            checkbox="checkbox" optionLabel="name">
+            <p-header>
+              <i class="fa fa-bank"></i>
+              Locations
+            </p-header>
+          </p-listbox>
+          <p>Selected locations are : <span *ngFor="let l of selectedlocation"
+              style="margin-right: 10px">{{l.name}}</span></p>
+        </div><br>
+
+        <div>
+          <span> Tool : </span>
+          <p-autoComplete formControlName="selectedplace" [suggestions]="filteredTools"
+            (completeMethod)="filterTools($event)" [size]="30" [minLength]="1" placeholder="Hint: type 'v' or 'f'"
+            [dropdown]="true">
+            <ng-template let-tool pTemplate="item">
+              <div class="ui-helper-clearfix" style="border-bottom:1px solid #D5D5D5">
+                <div style="font-size:18px;float:right;margin:10px 10px 0 0">{{tool}}</div>
+              </div>
+            </ng-template>
+          </p-autoComplete>
+        </div><br>
+        <div>
+          <span> Temporaray Address : </span>
+          <textarea rows="5" cols="30" formControlName="tempaddress" pInputTextarea></textarea>
+        </div><br>
+        <div>
+          <span> Check this button : </span>
+          <p-inputSwitch formControlName="checkfield" (click)="addcheck()"></p-inputSwitch>
+        </div><br>
+        <div>
+          <span>Permanent Address : </span>
+          <textarea rows="5" cols="30" formControlName="peraddress" pInputTextarea></textarea>
+        </div>
+        <div formArrayName="location">
+          <div *ngFor="let group of locationArray.controls; let i=index;" [formGroupName]="i">
+            <h3>location {{i+1}}</h3>
+            <div>
+              <img src="assets\plus.png" alt="add" width="20" height="20" (click)="addLocation()" />
+              <img src="assets\minus.png" alt="delete" width="20" height="20" (click)="removeLocation()" />
+            </div>
+            <div class="ui-g-4">Street: <input pInputText id="input" formControlName="Street" type="text" size="30">
+            </div>
+            <div class="ui-g-4">City: <input pInputText id="input" formControlName="City" type="text" size="30"></div>
+            <div class="ui-g-4">Zip code: <input pInputText id="input" formControlName="Zipcode" type="text" size="30">
+            </div>
+            <br>
+            <!-- <div>
+                <button pButton type="button" (click)="submit1()" label="LocSubmit"></button>&nbsp;&nbsp;
+                <button pButton type="button" (click)="add1()" label=" LocAddToJson"></button>
+              </div> -->
+          </div>
+        </div><br>
+        <div>
+          <div class="ui-g-12 ui-md-6 ui-lg-4">
+            <span>PhoneNumber :</span>
+            <p-inputMask mask="(999) 999-9999" placeholder="(999) 999-9999" formControlName="phonenumber"></p-inputMask>
+          </div>
+        </div><br><br><br><br>
+        <button (click)=add() pButton type="button" label="add" class="ui-button-rounded"></button>&nbsp;
+        <button (click)=reset() pButton type="button" label="reset" class="ui-button-rounded"></button>&nbsp;
+        <button (click)=addToTable() pButton type="button" label="addToTable" class="ui-button-rounded"></button>
+      </div>
+    </p-accordionTab>
+    <app-componentcommunication [data]="empForm.value"></app-componentcommunication>
+  </p-accordion>
+
+</form>
+<p-accordion>
+  <p-accordionTab header="JSON DATA">
+    <p *ngIf="showdata">{{ empForm.value | json }}</p>
+  </p-accordionTab>
+</p-accordion>
+<p-accordion>
+  <p-accordionTab header="TABLE">
+    <h3 class="first">TABLE</h3>
+    <p-table [value]="emp">
+      <ng-template pTemplate="header">
+        <tr>
+          <th>FirstName</th>
+          <th>LastName</th>
+          <th>UserName</th>
+          <th>Password</th>
+          <th>Confirm
+            Password</th>
+          <th>DateofBirth</th>
+          <th>Gender</th>
+          <th>Branch</th>
+          <th>Qualification</th>
+          <th>Knowledge</th>
+          <th>Rating</th>
+          <th>Company
+            Location
+          </th>
+          <th>Tool</th>
+          <th>Address</th>
+          <th>Phone
+            Number</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-emp1>
+        <tr>
+          <td>{{emp1.firstname}}</td>
+          <td>{{emp1.lastname}}</td>
+          <td>{{emp1.username}}</td>
+          <td>{{emp1.password}}</td>
+          <td>{{emp1.confirmpassword}}</td>
+          <td>{{emp1.dateofbirth}}</td>
+          <td>{{emp1.gender}}</td>
+          <td>{{emp1.branch.name }}</td>
+          <td>{{emp1.qualification}}</td>
+          <td>{{emp1.slider}}</td>
+          <td>{{emp1.val1}}</td>
+          <td>
+            <span *ngFor='let location of emp1.formlocation'>
+              {{location.name}}</span>
+          </td>
+          <td>{{emp1.selectedplace}}</td>
+          <td>{{emp1.address}}</td>
+          <td>{{emp1.phonenumber}}</td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </p-accordionTab>
+</p-accordion>
+
+
+
+<p-accordion>
+  <p-accordionTab header="Adding Rows Dynamically ">
+
+    <h2>Details of employee</h2>
+    <p-button icon="pi pi-plus" (click)="addRow()" style="float: right;"></p-button>&nbsp;
+    <form [formGroup]="tableForm">
+      <div formArrayName="empdetails">
+        <p-table [value]="empFormArray.controls">
+          <ng-template pTemplate="header">
+            <tr>
+              <th>id</th>
+              <th>name</th>
+              <th>salary</th>
+              <th>age</th>
+              <th>action</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-data let-rowIndex="rowIndex">
+            <tr [formGroupName]="rowIndex">
+              <td> <input size="35" placeholder="id" formControlName="id" pInputText></td>
+              <td> <input size="35" placeholder="name" formControlName="name" pInputText> </td>
+              <td><input size="35" placeholder="salary" formControlName="salary" pInputText> </td>
+              <td><input size="35" placeholder="age" formControlName="age" pInputText> </td>
+              <td>
+                <p-button icon="pi pi-minus" (click)="deleteRow(rowIndex)" style="float: right;"></p-button>&nbsp;
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+
+    </form>
+  </p-accordionTab>
+</p-accordion>

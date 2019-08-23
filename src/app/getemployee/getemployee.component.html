@@ -1,0 +1,53 @@
+
+<h2>Getting the  Address details</h2>
+  <p-table [value]="address1"> 
+   <ng-template pTemplate="header">
+       <tr>
+           <th>AddressType</th>
+           <th>Address Line 1</th>
+           <th>Address Line 2</th>
+           <th>Address Line 3</th>
+           <th>Address Line 4</th>
+           <th>Postal Code</th>
+           <th>City</th>
+           <th>Country</th>
+       </tr>
+   </ng-template>
+   <ng-template  pTemplate="body" let-add1>
+       <tr *ngFor="let add of add1.deliveryAddresses ">
+           <td>{{add.addressType}}</td>
+           <td>{{add.addressLineOne}}</td>
+           <td>{{add.addressLineTwo}}</td>
+           <td> {{add.addressLineThree}}</td>
+           <td>{{add.addressLineFour}}</td>
+           <td>{{add.zipCode}}</td>
+           <td>{{add.city}} </td>
+            <td>{{add.country}}</td> 
+       </tr>
+   </ng-template>
+  </p-table><br>
+  <pre>{{ address | json }}</pre>
+
+   <!-- <h2>Adding the employees</h2>
+  <div>
+    <div>
+       <label>Id: </label>
+       <input [(ngModel)]="emp_id" />
+    </div>
+    <div>
+       <label>Name: </label>
+       <input [(ngModel)]="emp_name" />
+    </div>
+    <div>
+        <label>Salary: </label>
+        <input [(ngModel)]="emp_salary" />
+     </div>
+     <div>
+        <label>Age: </label>
+        <input [(ngModel)]="emp_age" />
+     </div>
+
+    <div>
+       <button (click)="addEmployee()">Add</button>
+    </div>
+  </div>   -->

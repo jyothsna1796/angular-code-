@@ -1,0 +1,13 @@
+<form [formGroup]="empForm">
+    <div>
+        <span> Employee Name:</span><input type="text" formControlName="name" pInputText />
+    </div><br>
+    <div>
+        <span>Employee Salary:</span><input type="text" formControlName="salary" pInputText />
+    </div><br>
+    <div>
+        <span>Employee age:</span><input type="text" formControlName="age" pInputText /><br>
+    </div><br>
+    <button pButton type="button" (click)="addEmp()" label="submit"></button>  
+    <br>
+</form>

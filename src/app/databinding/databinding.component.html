@@ -1,0 +1,41 @@
+<h2 class="a1"> DATA BINDING</h2>
+<h3>Interpolation</h3> Welcome to : {{title}}
+
+<h3>Property Binding</h3> 
+<div>
+    <span>Name: </span>
+    <input id="input" type="text" size="30" pInputText [value]="name"> 
+</div><br><br>
+<div>
+        <span>Id: </span>
+        <input id="input" type="text" size="30" pInputText [value]="id"> 
+</div>
+<h3>Event Binding</h3>
+<!-- Before clicking data is: {{data}} <br> -->
+<button pButton type="button" (click)="changeData()" label="click" class="ui-button-rounded"></button><br>
+After clicking data is :{{data}}
+
+<h3>Two-way Binding</h3>
+<input type="text" [(ngModel)]="value">
+Welcome to : {{value}}<br>
+
+<h3>String Interpolation</h3>
+The Original name is :{{originalname}}
+<br>
+
+<!-- **************difference between property and interpolation********************** -->
+<div class="ui-g-12">
+<h3>difference between interpolation and property  </h3>
+when both fields are true<br>
+property: <input id="input" type="text" size="30"  [disabled]="false" pInputText [value]="name"> <br>
+interpolation:<input id="input" type="text" size="30"  disabled="true" pInputText value={{id}}> <br>
+when both the fields are false<br>
+property: <input id="input" type="text" size="30"  [disabled]="false" pInputText [value]="name"> <br>
+interpolation:<input id="input" type="text" size="30"  disabled="false" pInputText value={{id}}> 
+</div>
+
+<!-- ---------------------captcha------------------- -->
+<h2>captcha</h2>
+<p-toast [style]="{marginTop: '80px'}"></p-toast>
+<h2>hlo</h2>
+<p-captcha siteKey="6Lf2XQkTAAAAANcvOwYqPxWL4iZDksFqHpS39GDA" (onResponse)="showResponse($event)"></p-captcha>

@@ -1,0 +1,59 @@
+<h3 class="a1">Pipes Concept in Angular</h3>
+<p-tabView>
+    <p-tabPanel header="string pipes" [selected]="true">
+        <h3> uppercase pipe : </h3>
+        {{ title | uppercase }}
+        <br>
+        <h3>lowercase pipe : </h3>
+        {{ data | lowercase }}
+        <br>
+        <h3> titlecase pipe :</h3>
+        {{ title | titlecase }}<br>
+        <h3>slice pipe with one argument :</h3>
+        {{ title | slice:5}}<br>
+        <h3>slice with 2 arguments : </h3>{{ slice | slice: 5: 16}}<br>
+        <h3>json pipe :</h3> {{ student | json}}<br>
+    </p-tabPanel>
+    <p-tabPanel header="date pipe" [closable]="true">
+        <h3> date pipe : </h3>
+        {{ todaydate }}<br>
+        {{ todaydate | date:'d/M/y'}}<br>
+        {{ todaydate | date:'MM/DD/YYYY'}}
+        {{ todaydate | date:'short'}}<br>
+        {{ tadaydate | date:'shortDate'}}<br>
+        {{ todaydate | date:'shortTime'}}<br>
+        {{ todaydate | date:'longTime'}}<br>
+        {{ todaydate | date:'fullTime' }}<br>
+        {{ todaydate | date:'longDate'}}<br>
+        {{ todaydate | date:'long'}}<br>
+        <!-- ......................chaining pipe.................... -->
+        {{ todaydate | date:'fullDate' | uppercase}}<br>
+        {{ todaydate | date:'format'}}
+    </p-tabPanel>
+    <p-tabPanel header="number pipe" [closable]="true">
+        <h3> number pipe :</h3>
+        {{ 5.34567 | number:'1.2-3'}}<br>
+        {{ 5.34567 | number: '2.6-7'}}<br>
+        {{ 5.34567 | number: '3.2-3'}}
+        <h3>percentage pipe: </h3>
+        {{ 0.25 | percent}}<br>
+        {{0.725 | percent}}<br>
+        {{0.364287465486 | percent}}<br>
+        <h3>currency : </h3>
+        {{0.25 | currency }}<br>
+        {{0.25 | currency:'GBP'}}<br>
+        {{ 1.25 | currency: 'EUR'}}<br>
+        {{ 2345 | currency: 'USD'}}<br>
+        {{ 947483 | currency: 'INR' : 'code'}}<br>
+    </p-tabPanel>
+    <p-tabPanel header="async pipe" [closable]="true">
+        <h3> async pipe: </h3>
+        The output for async pipe: {{ myObservable | async}}
+    </p-tabPanel>
+    <p-tabPanel header="custom sort pipe" [closable]="true">
+        <h3> custom pipe:</h3>
+            before sorting: {{ names}}<br>
+            after sorting: {{ names | psort }}
+    </p-tabPanel>
+
+</p-tabView>

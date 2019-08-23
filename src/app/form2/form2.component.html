@@ -1,0 +1,199 @@
+<div>
+        <h3>TEMPLATE DRIVEN FORMS</h3>
+        <form #f="ngForm" [appPassword]="['password','confirmpassword']">
+            <div class="ui-g-6">
+                <div class="form-group">
+                    <label>First Name: </label>
+                    <input type="text" class="form-control" name="firstname" required="required" #control1="ngModel"
+                        minlength="5" maxlength="20" pInputText [(ngModel)]="firstname">
+                    <span *ngIf="control1.errors?.required && (control1.touched)">FirstName is Required</span>
+                    <span *ngIf="control1.errors?.minlength ||control1.errors?.maxlength">
+                        Field should contain minimum 5 to maxium 20 characters</span>
+                </div>
+            </div>
+    
+            <div class="ui-g-6">
+                <div class="form-group">
+                    <label>Last Name: </label>
+                    <input type="text" class="form-control" name="lastname" required="required" #control2="ngModel"
+                        minlength="3" pInputText [(ngModel)]="lastname">
+                    <span *ngIf="control2.errors?.required && (control2.touched)">LastName is Required</span>
+                    <span *ngIf="control2.errors?.minlength ||control2.errors?.maxlength">
+                        Field should contain minimum 5 to maxium 20 characters</span>
+                </div>
+            </div><br>
+            <div class="ui-g-6">
+                <div class="form-group">
+                    <label>User Name: </label>
+                    <input type="text" class="form-control" name="username" required="required" #control3="ngModel"
+                        minlength="5" maxlength="15" pattern="^[a-zA-Z0-9]*$" pInputText [(ngModel)]="username">
+                    <span *ngIf="control3.errors?.required && (control3.touched)">UserName is Required</span>
+                    <span *ngIf="control3.errors?.minlength ||control3.errors?.maxlength">
+                        Field should contain minimum 5 to maxium 20 characters</span>
+                    <span *ngIf="control3.errors?.pattern">Username consists of alphabets and digits</span>
+                </div>
+            </div>
+            <div class="ui-g-6">
+                <div class="form-group">
+                    <label>Password: </label>
+                    <input pPassword type="password" class="form-control" name="password" required="required"
+                        #control4="ngModel" minlength="8" pattern="^([a-zA-Z0-9!@#$%^&*()?]{8,15})$" pInputText
+                        [(ngModel)]="password" >
+                    <span *ngIf="control4.errors?.required && (control4.touched)">Password is Required</span>
+                    <span *ngIf="control4.errors?.pattern">password conssts of alphabets and digits and Symbols</span>
+                </div>
+            </div>
+            <div class="ui-g-6">
+                <div class="form-group">
+                    <label>Confirm Password: </label>
+                    <input pPassword type="password" class="form-control" name="confirmpassword"
+                         #control5="ngModel" required="required" pInputText
+                        [(ngModel)]="confirmpassword">
+                    <span *ngIf="control5.errors?.required && (control5.touched)">Confirm Password field is required</span>
+                    <span *ngIf="control5.errors?.mustMatch">Confirm password must match with password field</span>
+                </div>
+            </div>
+            <div class="ui-g-6">
+                <div class="form-group">
+                    <label>DateOfBirth: </label>
+                    <p-calendar [(ngModel)]="dateofbirth" name="dateofbirth" [numberOfMonths]="2"></p-calendar>
+                </div>
+            </div>
+            <div class="ui-g-6">
+                <div class="form-group">
+                    <span>Gender: </span>
+                    <p-radioButton name="gender"  value="male" label="male" required="required" [(ngModel)]="gender"></p-radioButton>
+                    <p-radioButton name="gender"  value="female" label="female"  required="required" [(ngModel)]="gender"></p-radioButton>
+                    <!-- <span *ngIf="control7.errors?.required && control7.touched"></span> -->
+                </div>
+            </div>
+            <div class="ui-g-6">
+                <div class="form-group">
+                    <label>Email: </label>
+                    <input type="text" class="form-control" name="email" #control8="ngModel" required="required"
+                        pattern="^[a-zA-Z0-9]+@[a-zA-Z]+.com" placeholder="abc@xyz.com" pInputText [(ngModel)]="email">
+                    <span *ngIf="control8.errors?.required && (control8.touched)">Email is Required</span>
+                    <span *ngIf="control8.errors?.pattern">Email pattern should match</span>
+                </div>
+            </div>
+            <div class="ui-g-6">
+                <div class="form-group">
+                    <label>Educational Qualification: </label>
+                    <p-dropdown class="form-control" [options]="qua" name="qua" [(ngModel)]="selectqua"
+                        placeholder="Selectqualification"></p-dropdown>
+                </div>
+            </div>
+            <div class="ui-g-6">
+                <div class="form-group">
+                    <label>Languages known: </label>
+                    <p-checkbox name="language" value="ENGLISH" label="ENGLISH" [(ngModel)]="language"></p-checkbox>
+                    <p-checkbox name="language" value="HINDI" label="HINDI" [(ngModel)]="language"></p-checkbox>
+                    <p-checkbox name="language" value="TELUGU" label="TELUGU" [(ngModel)]="language"></p-checkbox>
+                    <p-checkbox name="language" value="TAMIL" label="TAMIL" [(ngModel)]="language"></p-checkbox>
+                </div>
+            </div>
+            <div class="ui-g-6">
+                <div class="form-group">
+                    <label>Softskills Rating: </label>
+                    <p-rating name="rating" [(ngModel)]="rating"></p-rating>
+                </div>
+            </div>
+            <div class="ui-g-6">
+                <div class="form-group">
+                    <label>Worked Tools: </label>
+                    <p-autoComplete [(ngModel)]="selectedplace" name="selectedplace" [suggestions]="filteredTools"
+                        (completeMethod)="filterTools($event)" [size]="30" [minLength]="1"
+                        placeholder="Hint: type 'v' or 'f'" [dropdown]="true">
+                        <ng-template let-tool pTemplate="item">
+                            <div class="ui-helper-clearfix" style="border-bottom:1px solid #D5D5D5">
+                                <div style="font-size:18px;float:right;margin:10px 10px 0 0">{{tool}}</div>
+                            </div>
+                        </ng-template>
+                    </p-autoComplete>
+                </div>
+            </div>
+            <div>
+                <div class="ui-g-12 ui-md-6 ui-lg-4">
+                    <span>PhoneNumber :</span>
+                    <p-inputMask mask="(999) 999-9999" name="phonenumber" placeholder="(999) 999-9999"
+                        [(ngModel)]="phonenumber"></p-inputMask>
+                </div>
+            </div>
+            <div class="ui-g-6">
+                <div class="form-group">
+                    <label>Temporary Address : </label>
+                    <textarea [rows]="5" [cols]="30" name="tempaddress" [(ngModel)]="tempaddress" pInputTextarea
+                        autoResize="autoResize"></textarea>
+                </div>
+                <div>
+                    <p-inputSwitch [(ngModel)]="checkfield" name="checkfield" (click)="addcheck(f)"></p-inputSwitch>
+                </div>
+            </div>
+            <div class="ui-g-6">
+                <div class="form-group">
+                    <label>Permanent Address : </label>
+                    <textarea [rows]="5" [cols]="30" name="peraddress" [(ngModel)]="peraddress" pInputTextarea
+                        autoResize="autoResize"></textarea>
+                </div>
+            </div>
+            <div class="ui-g-6">
+                <div class="form-group">
+                    <label>Permanent Address : </label>
+                    <textarea [rows]="5" [cols]="30" name="peraddress" [(ngModel)]="peraddress" pInputTextarea
+                        autoResize="autoResize"></textarea>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="ui-g-12">
+        <button (click)=add() pButton name="button" label="add" class="ui-button-rounded"></button>&nbsp;
+        <button (click)=reset(f) pButton name="button" label="reset" class="ui-button-rounded"></button>&nbsp;
+        <button (click)=addToTable(f) pButton name="button" label="addToTable" class="ui-button-rounded"></button>
+        <button (click)=submit(f) pButton name="button" label="submit" class="ui-button-rounded"></button>
+    </div>
+    <div class="ui-g-12">
+        <p *ngIf="showdata">{{ f.value | json }}</p>
+    </div>
+    <div class="ui-g-12">
+        <p-table [value]="stuarray">
+        <ng-template pTemplate="header">
+            <tr>
+                <th>FirstName</th>
+                <th>LastName</th>
+                <th>UserName</th>
+                <th>Password</th>
+                <th>Confirm
+                    Password</th>
+                <th>DateofBirth</th>
+                <th>Gender</th>
+                <th>Email</th>
+                <!-- <th>Qualification</th> -->
+                <th>language</th>
+                <th>Rating</th>
+                <th>Tool</th>
+                <th>Phone
+                    Number</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-stu1>
+            <tr>
+                <td>{{stu1.firstname}}</td>
+                <td>{{stu1.lastname}}</td>
+                <td>{{stu1.username}}</td>
+                <td>{{stu1.password}}</td>
+                <td>{{stu1.confirmpassword}}</td>
+                <td>{{stu1.dateofbirth}}</td>
+                <td>{{stu1.gender}}</td>
+                <td>{{stu1.email}}</td>
+                <!-- <td>{{stu1.qua.label}}</td> -->
+                <td>{{stu1.language}}</td>
+                <td>{{stu1.rating}}</td>
+                <td>{{stu1.selectedplace}}</td>
+                <td>{{stu1.phonenumber}}</td>
+            </tr>
+        </ng-template>
+    </p-table>
+
+    </div>
+    
+    

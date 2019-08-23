@@ -1,0 +1,31 @@
+:host ::ng-deep .ui-listbox{
+    min-width: 15em ;
+}
+.a1{
+    float: center;
+}
+::ng-deep body .ui-message.ui-message-error {
+    background-color: transparent;
+    border: 0 none;
+    color: #F31404;
+    }
+    
+    ::ng-deep .pi-times:before {
+    content: none;
+    }
+   ::ng-deep body .ui-message .ui-message-text {
+    background-color: transparent;
+    border:  none;
+    color: #F31404;
+    }
+    ::ng-deep body .ui-message {
+        border :none;
+    }
+
+
+    ::ng-deep .pi-info-circle:before {
+        content: none;
+    }
+   ::ng-deep ng-star-inserted{
+       color: red;
+   }

@@ -1,0 +1,9 @@
+
+<div *ngFor="let r of radio; let i = index">
+        <mat-slide-toggle [(ngModel)]="r.value" [checked]="r.value" [disabled]="r.disable" (change)="addCheck(r.value, i)"></mat-slide-toggle>
+
+</div>
+ 
+    <p-button label="Click" (click)="finalData()"></p-button>
+
+
